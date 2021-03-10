@@ -24,8 +24,8 @@ namespace ConsoleGameTest_00
         {
             var console = new Console(80, 25);
             console.FillWithRandomGarbage();
-            console.Fill(new Rectangle(3, 3, 23, 3), Color.Violet, Color.Black, 0, 0);
-            console.Print(4, 4, "Hello from SadConsole");
+            console.Fill(new Rectangle(3, 3, 33, 3), Color.Violet, Color.Black, 0, 0);
+            console.Print(4, 4, "Hello from SadConsole, asshole!");
 
             SadConsole.Global.CurrentScreen = console;
         }
