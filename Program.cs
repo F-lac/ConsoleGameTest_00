@@ -1,5 +1,7 @@
 ﻿using System;
 using SadConsole;
+using SadConsole.Components;
+using SadConsole.Input;
 using Microsoft.Xna.Framework;
 using Console = SadConsole.Console;
 
@@ -23,14 +25,33 @@ namespace ConsoleGameTest_00
         static void Init()
         {
             var console = new Console(80, 25);
-            console.FillWithRandomGarbage();
-            console.Fill(new Rectangle(3, 3, 33, 3), Color.Violet, Color.Black, 0, 0);
-            console.Print(4, 4, "Hello from SadConsole, asshole!");
+            console.Fill(Color.White, Color.Black, 0);
 
-            Player p = new Player(console, 100);
-            p.Update(null);
+            console.IsFocused = true;
+            console.Components.Add(new MyKeyboardComponent());
+
+            Player.Entity = new SadConsole.Entities.Entity(Color.White, Color.Black, 1);
+            Player.Entity.Parent = console;
+            Player.Entity.Position = new Point(5,2);
 
             SadConsole.Global.CurrentScreen = console;
+        }
+    }
+
+    public class MyKeyboardComponent : KeyboardConsoleComponent
+    {
+        public override void ProcessKeyboard(SadConsole.Console console, Keyboard info, out bool handled)
+        {
+            if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
+                Player.Entity.Position += SadConsole.Directions.North;
+            if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
+                Player.Entity.Position += SadConsole.Directions.South;
+            if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
+                Player.Entity.Position += SadConsole.Directions.East;
+            if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
+                Player.Entity.Position += SadConsole.Directions.West;
+
+            handled = true;
         }
     }
 }
