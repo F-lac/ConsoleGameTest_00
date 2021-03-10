@@ -27,6 +27,9 @@ namespace ConsoleGameTest_00
             console.Fill(new Rectangle(3, 3, 33, 3), Color.Violet, Color.Black, 0, 0);
             console.Print(4, 4, "Hello from SadConsole, asshole!");
 
+            Player p = new Player(console, 100);
+            p.Update(null);
+
             SadConsole.Global.CurrentScreen = console;
         }
     }
