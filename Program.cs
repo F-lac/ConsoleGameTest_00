@@ -24,15 +24,34 @@ namespace ConsoleGameTest_00
 
         static void Init()
         {
+            var fontMaster = SadConsole.Global.LoadFont("Fonts/font-sample_extended.font");
+            SadConsole.Global.FontDefault = fontMaster.GetFont(Font.FontSizes.One);
+
             var console = new Console(80, 25);
             console.Fill(Color.White, Color.Black, 0);
+
+            Cell cell = new Cell(Color.White, Color.Black, 10);
+            CellDecorator cellDec1 = new CellDecorator(Color.White, 256, Microsoft.Xna.Framework.Graphics.SpriteEffects.None);
+            CellDecorator cellDec2 = new CellDecorator(Color.White, 257, Microsoft.Xna.Framework.Graphics.SpriteEffects.None);
+            CellDecorator cellDec3 = new CellDecorator(Color.White, 258, Microsoft.Xna.Framework.Graphics.SpriteEffects.None);
+            CellDecorator cellDec4 = new CellDecorator(Color.White, 259, Microsoft.Xna.Framework.Graphics.SpriteEffects.None);
+            CellDecorator[] cDArray = new CellDecorator[4];
+            cDArray[0] = cellDec1;
+            cDArray[1] = cellDec2;
+            cDArray[2] = cellDec3;
+            cDArray[3] = cellDec4;
+            CellState cellState = new CellState(Color.White, Color.Black, 10, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, true, cDArray);
+            cell.RestoreState(ref cellState);
 
             console.IsFocused = true;
             console.Components.Add(new MyKeyboardComponent());
 
-            Player.Entity = new SadConsole.Entities.Entity(Color.White, Color.Black, 1);
+            Player.Entity = new SadConsole.Entities.Entity(Color.White, Color.Black, 64);
             Player.Entity.Parent = console;
             Player.Entity.Position = new Point(5,2);
+
+            console.Print(7,7,"A",Color.White, Color.Black);
+            console.SetDecorator(7,7,1,cDArray);
 
             SadConsole.Global.CurrentScreen = console;
         }

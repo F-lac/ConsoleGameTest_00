@@ -32,3 +32,6 @@ obj/Debug/netcoreapp3.1/ConsoleGameTest_00.csprojAssemblyReference.cache
 obj/Debug/netcoreapp3.1/ConsoleGameTest_00.dll
 obj/Debug/netcoreapp3.1/ConsoleGameTest_00.genruntimeconfig.cache
 obj/Debug/netcoreapp3.1/ConsoleGameTest_00.pdb
+bin/Debug/netcoreapp3.1/Fonts/font-sample_extended.font
+bin/Debug/netcoreapp3.1/Fonts/font-sample_extended.png
+bin/Debug/netcoreapp3.1/Fonts/font-sample.png
