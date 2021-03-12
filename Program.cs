@@ -53,6 +53,28 @@ namespace ConsoleGameTest_00
             console.Print(7,7,"A",Color.White, Color.Black);
             console.SetDecorator(7,7,1,cDArray);
 
+            Map maptest = new Map(80,25);
+            World.ActualMap = maptest;
+            Random rnd = new Random();
+            for(int i = 0; i < 80; i++)
+            {
+                for(int j = 0; j < 25; j++)
+                {
+                    TerrainInfo ti = new TerrainInfo();
+                    ti.Height = 0;
+                    ti.PassableNorth = true;
+                    ti.PassableWest = true;
+                    ti.PassableSouth = true;
+                    ti.PassableEast = true;
+                    ti.Obstacle = rnd.NextDouble() > 0.7;
+                    maptest[i,j] = ti;
+                }
+            }
+            maptest.Refresh();
+
+            maptest.MapConsole.Parent = console;
+            maptest.MapConsole.Position = new Point(0,0);
+
             SadConsole.Global.CurrentScreen = console;
         }
     }
@@ -62,13 +84,25 @@ namespace ConsoleGameTest_00
         public override void ProcessKeyboard(SadConsole.Console console, Keyboard info, out bool handled)
         {
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
-                Player.Entity.Position += SadConsole.Directions.North;
+            {
+                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.North].Obstacle)
+                    Player.Entity.Position += SadConsole.Directions.North;
+            }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
-                Player.Entity.Position += SadConsole.Directions.South;
+            {
+                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.South].Obstacle)
+                    Player.Entity.Position += SadConsole.Directions.South;
+            }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
-                Player.Entity.Position += SadConsole.Directions.East;
+            {
+                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.East].Obstacle)
+                    Player.Entity.Position += SadConsole.Directions.East;
+            }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
-                Player.Entity.Position += SadConsole.Directions.West;
+            {
+                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.West].Obstacle)
+                    Player.Entity.Position += SadConsole.Directions.West;
+            }
 
             handled = true;
         }

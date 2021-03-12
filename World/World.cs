@@ -8,6 +8,6 @@ namespace ConsoleGameTest_00
 {
     public static class World
     {
-
+        public static Map ActualMap;
     }
 }
