@@ -67,6 +67,8 @@ namespace ConsoleGameTest_00
                     ti.PassableSouth = true;
                     ti.PassableEast = true;
                     ti.Obstacle = rnd.NextDouble() > 0.7;
+                    if(j==0||j==24||i==0||i==79)
+                        ti.Obstacle = true;
                     maptest[i,j] = ti;
                 }
             }
