@@ -9,8 +9,8 @@ namespace ConsoleGameTest_00
 {
     public static class Player : IActiveObject
     {
-        public static int MaxHealth;
-        public static int Health;
+        public static HealthHandler HealthHandler;
+        public static CombatHandler CombatHandler;
         public static Entity Entity;
 
         public static void UpdateActions()

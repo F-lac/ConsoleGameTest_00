@@ -31,5 +31,28 @@ namespace ConsoleGameTest_00
                 isDead = true;
             }
         }
+
+        public void Heal(int heal)
+        {
+            if(!isDead)
+            {
+                if(MaxHealth - Health >= heal)
+                {
+                    Health += heal;
+                } else {
+                    Health = MaxHealth;
+                }
+            }
+        }
+
+        public void Resurrect(int heal)
+        {
+            if(MaxHealth - Health >= heal)
+            {
+                Health += heal;
+            } else {
+                Health = MaxHealth;
+            }
+        }
     }
 }
