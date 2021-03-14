@@ -8,11 +8,11 @@ namespace ConsoleGameTest_00
 {
     public static class GameLogic
     {
-        private int _turn;
+        private static int _turn;
 
         
 
-        public void NextTurn()
+        public static void NextTurn()
         {
 
         }

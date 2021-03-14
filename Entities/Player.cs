@@ -7,10 +7,11 @@ using Console = SadConsole.Console;
 
 namespace ConsoleGameTest_00
 {
-    public static class Player : IActiveObject
+    public static class Player
     {
         public static HealthHandler HealthHandler;
         public static CombatHandler CombatHandler;
+        public static MovementHandler MovementHandler;
         public static Entity Entity;
 
         public static void UpdateActions()
