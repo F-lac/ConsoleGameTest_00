@@ -49,6 +49,7 @@ namespace ConsoleGameTest_00
             Player.Entity = new SadConsole.Entities.Entity(Color.White, Color.Black, 64);
             Player.Entity.Parent = console;
             Player.Entity.Position = new Point(5,2);
+            Player.MovementHandler = new MovementHandler(new Point(5,2),1);
 
             console.Print(7,7,"A",Color.White, Color.Black);
             console.SetDecorator(7,7,1,cDArray);
@@ -85,25 +86,31 @@ namespace ConsoleGameTest_00
     {
         public override void ProcessKeyboard(SadConsole.Console console, Keyboard info, out bool handled)
         {
+            if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Enter))
+            {
+                Player.UpdateActions();
+                Player.UpdateReactions();
+            }
+
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
             {
-                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.North].Obstacle)
-                    Player.Entity.Position += SadConsole.Directions.North;
+                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.North);
+                Player.Move = true;
             }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
             {
-                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.South].Obstacle)
-                    Player.Entity.Position += SadConsole.Directions.South;
+                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.South);
+                Player.Move = true;
             }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
             {
-                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.East].Obstacle)
-                    Player.Entity.Position += SadConsole.Directions.East;
+                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.West);
+                Player.Move = true;
             }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
             {
-                if(!World.ActualMap[Player.Entity.Position + SadConsole.Directions.West].Obstacle)
-                    Player.Entity.Position += SadConsole.Directions.West;
+                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.East);
+                Player.Move = true;
             }
 
             handled = true;

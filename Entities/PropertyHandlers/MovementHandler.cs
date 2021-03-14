@@ -32,6 +32,7 @@ namespace ConsoleGameTest_00
             } else {
                 Position += Directions.Points[(int)Direction];
                 CurrentTurn = 0;
+                Moving = false;
             }
         }
 
@@ -39,6 +40,12 @@ namespace ConsoleGameTest_00
         {
             Moving = false;
             CurrentTurn = 0;
+        }
+
+        public void ChangeDirection(Directions.DirectionEnum dir)
+        {
+            Stop();
+            Direction = dir;
         }
 
 
