@@ -13,7 +13,6 @@ namespace ConsoleGameTest_00
         public static CombatHandler CombatHandler;
         public static MovementHandler MovementHandler;
         public static Entity Entity;
-        public static bool Occupied;
         public static bool Move;
 
         public static void UpdateActions()
@@ -21,7 +20,6 @@ namespace ConsoleGameTest_00
             if(Move)
             {
                 MovementHandler.Move();
-                Occupied = true;
             }
         }
 
@@ -29,18 +27,15 @@ namespace ConsoleGameTest_00
         {
             if(Move)
             {
-                if(World.ActualMap[MovementHandler.Position + Directions.Points[(int)MovementHandler.Direction]].Obstacle)
+                if(World.ActualMap[Entity.Position + Directions.Points[(int)MovementHandler.Direction]].Obstacle)
                 {
                     MovementHandler.Stop();
-                    Occupied = false;
                     Move = false;
                 } else {
-                    Occupied = true;
+                    Move = true;
                     if(Entity.Position != MovementHandler.Position)
                     {
                         Entity.Position = MovementHandler.Position;
-                        Occupied = false;
-                        Move = false;
                     }
                 }
             }

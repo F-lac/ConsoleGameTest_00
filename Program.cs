@@ -49,7 +49,7 @@ namespace ConsoleGameTest_00
             Player.Entity = new SadConsole.Entities.Entity(Color.White, Color.Black, 64);
             Player.Entity.Parent = console;
             Player.Entity.Position = new Point(5,2);
-            Player.MovementHandler = new MovementHandler(new Point(5,2),1);
+            Player.MovementHandler = new MovementHandler(new Point(5,2),0);
 
             console.Print(7,7,"A",Color.White, Color.Black);
             console.SetDecorator(7,7,1,cDArray);
@@ -86,6 +86,19 @@ namespace ConsoleGameTest_00
     {
         public override void ProcessKeyboard(SadConsole.Console console, Keyboard info, out bool handled)
         {
+            if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Tab))
+            {
+                if(Logging.Open)
+                {
+                    SadConsole.Global.CurrentScreen = console;
+                    Logging.Open = false;
+                } else {
+                    Logging.Refresh();
+                    SadConsole.Global.CurrentScreen = Logging.LogConsole;
+                    Logging.Open = true;
+                }
+            }
+
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Enter))
             {
                 Player.UpdateActions();
@@ -94,22 +107,34 @@ namespace ConsoleGameTest_00
 
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Up))
             {
-                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.North);
+                if(Player.MovementHandler.Direction != Directions.DirectionEnum.North)
+                {
+                    Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.North);
+                }
                 Player.Move = true;
             }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Down))
             {
-                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.South);
+                if(Player.MovementHandler.Direction != Directions.DirectionEnum.South)
+                {
+                    Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.South);
+                }
                 Player.Move = true;
             }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
             {
-                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.West);
+                if(Player.MovementHandler.Direction != Directions.DirectionEnum.West)
+                {
+                    Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.West);
+                }
                 Player.Move = true;
             }
             if (info.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Left))
             {
-                Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.East);
+                if(Player.MovementHandler.Direction != Directions.DirectionEnum.East)
+                {
+                    Player.MovementHandler.ChangeDirection(Directions.DirectionEnum.East);
+                }
                 Player.Move = true;
             }
 

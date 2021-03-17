@@ -32,7 +32,6 @@ namespace ConsoleGameTest_00
             } else {
                 Position += Directions.Points[(int)Direction];
                 CurrentTurn = 0;
-                Moving = false;
             }
         }
 
